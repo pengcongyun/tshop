@@ -13,5 +13,23 @@ return array(
     'DB_PORT'               =>  '3306',        // 端口
     'DB_PREFIX'             =>  't_',    // 数据库表前缀
 
-    //
+    //默认访问
+    'DEFAULT_MODULE'        =>  'Admin',  // 默认模块
+    'DEFAULT_CONTROLLER'    =>  'Login', // 默认控制器名称
+    'DEFAULT_ACTION'        =>  'login', // 默认操作名称
+
+    //配置模板引擎，给public下设置前缀，根目录
+    'TMPL_PARSE_STRING'=>[
+        '_CSS_'=>'/Public/css',
+        '_JS_'=>'/Public/js',
+        '_IMG_'=>'/Public/images',
+        '_FONTS_'=>'/Public/fonts',
+        '_LAYER_'=>'/Public/layer',
+        '_UPLOADIFY_'=>'/Public/uploadify',
+        '_UEDITOR_'=>'/Public/ueditor',
+        '_ZTREE_'=>'/Public/ztree',
+    ],
+
+    //设置cookie前缀
+    'COOKIE_PREFIX'=>'www_tshop_com_'
 );
