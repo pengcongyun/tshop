@@ -11,6 +11,9 @@ use Think\Controller;
 class LoginController extends Controller
 {
     public function login(){
+        if(!empty(cookie('adminname'))){
+            redirect(U('Index/index'));exit;
+        }
         if(IS_POST){
             //验证数据
             if(D('admin')->create()===false){
@@ -22,13 +25,15 @@ class LoginController extends Controller
                 $this->error('用户名或者密码错误');exit;
             }
             //验证密码
-            if($data['password']!=I('post.password')){
+            if(tp_password(I('post.password'),$data['salt'])!=$data['password']){
                 $this->error('用户名或者密码错误');exit;
             }
             $res=D('admin')->where(['username'=>I('post.username')])->save(['last_login_time'=>time(),'last_login_ip'=>get_client_ip()]);
             //验证是否记住登录 存个4小时
             if(I('post.check')==1){
-                cookie('adminname',$data,60);
+                cookie('adminname',$data,4*60*60);
+            }else{
+                cookie('adminname',$data,60*60);
             }
             $this->success('登录成功',U('Index/index'));exit;
         }

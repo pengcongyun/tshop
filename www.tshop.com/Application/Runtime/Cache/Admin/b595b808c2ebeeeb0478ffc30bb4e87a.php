@@ -17,6 +17,13 @@
 
     
 
+    <style>
+        .table th, .table td {
+            text-align: center;
+            /*height:38px;*/
+            vertical-align: middle;
+        }
+    </style>
     <!--<link href="/Public/layer/layer.css" rel="stylesheet">-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -151,20 +158,65 @@
         </div>
         <!-- header section end-->
 
+    <!-- page heading start-->
+    <div class="page-heading">
+        <h3>
+            管理首页
+        </h3>
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">管理后台</a>
+            </li>
+            <li class="active"> 管理首页 </li>
+        </ul>
+    </div>
+    <!-- page heading end-->
         <!-- page heading start-->
-        <div class="page-heading">
-            <h3>
-                管理首页
-            </h3>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#">管理后台</a>
-                </li>
-                <li class="active"> 管理首页 </li>
-            </ul>
-        </div>
-        <!-- page heading end-->
-
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        XXX列表
+                        <span class="tools pull-right">
+                                <a href="add.html" class="btn btn-success btn-link">新增</a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table">
+                            <table  class="display table table-bordered table-striped table-hover" id="dynamic-table">
+                                <thead>
+            <tr>
+                <th>管理员ID</th>
+                <th>用户名</th>
+                <th>头像</th>
+                <th>密码</th>
+                <th>登录时间</th>
+                <th>登录IP</th>
+                <th>密盐</th>
+                <th>操作</th>
+            </tr>
+                                </thead>
+                                <tbody>
+            <?php if(is_array($data)): foreach($data as $key=>$row): ?><tr>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["id"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["username"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <?php if($row["thumb"] == ''): ?><img src="/Public/images/photos/user-avatar.png" alt="">
+                    <?php else: ?>
+                        <img src="<?php echo ($row["thumb"]); ?>" alt=""><?php endif; ?>
+                   
+                </td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["password"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["last_login_ip"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo date('Y-m-d H:i:s',$row['last_login_time']);?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["salt"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <a href="" class="btn btn-danger">删除</a> <a href="" class="btn btn-info">修改</a>
+                </td>
+            </tr><?php endforeach; endif; ?>
+                                </tbody>
+        </table>
 
         <!--footer section start-->
         <footer>
