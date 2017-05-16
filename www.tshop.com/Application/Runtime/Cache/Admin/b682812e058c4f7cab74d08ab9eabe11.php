@@ -14,13 +14,14 @@
     <link href="/Public/css/style.css" rel="stylesheet">
     <link href="/Public/css/style-responsive.css" rel="stylesheet">
 
-<!--引用百度地图API-->
-<style type="text/css">
-    html,body{margin:0;padding:0;}
-    .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
-    .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
-</style>
-<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+    <style>
+        .table th {
+            text-align: center;
+            /*height:38px;*/
+            vertical-align: middle;
+        }
+
+    </style>
 
     <script src="/Public/js/html5shiv.js"></script>
 <script src="/Public/js/respond.min.js"></script>
@@ -171,53 +172,47 @@
         <div class="row">
             <div class="col-sm-12">
                 <section class="panel">
-
+                    <header class="panel-heading">
+                        管理员列表
+                        <span class="tools pull-right">
+                                <a href="<?php echo U('add');?>" class="btn btn-success btn-link">新增</a>
+                            </span>
+                    </header>
                     <div class="panel-body">
                         <div class="adv-table">
-
-                            <!--百度地图容器-->
-                            <div style="width:1400px;height:1100px;border:#ccc solid 1px;" id="dituContent"></div>
-
-                            <script type="text/javascript">
-                                //创建和初始化地图函数：
-                                function initMap(){
-                                    createMap();//创建地图
-                                    setMapEvent();//设置地图事件
-                                    addMapControl();//向地图添加控件
-                                }
-
-                                //创建地图函数：
-                                function createMap(){
-                                    var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
-                                    var point = new BMap.Point(104.071216,30.576279);//定义一个中心点坐标
-                                    map.centerAndZoom(point,12);//设定地图的中心点和坐标并将地图显示在地图容器中
-                                    window.map = map;//将map变量存储在全局
-                                }
-
-                                //地图事件设置函数：
-                                function setMapEvent(){
-                                    map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
-                                    /*map.enableScrollWheelZoom();//启用地图滚轮放大缩小*/
-                                    map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
-                                    map.enableKeyboard();//启用键盘上下左右键移动地图
-                                }
-
-                                //地图控件添加函数：
-                                function addMapControl(){
-                                    //向地图中添加缩放控件
-                                    var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-                                    map.addControl(ctrl_nav);
-                                    //向地图中添加缩略图控件
-                                    var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
-                                    map.addControl(ctrl_ove);
-                                    //向地图中添加比例尺控件
-                                    var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
-                                    map.addControl(ctrl_sca);
-                                }
-
-
-                                initMap();//创建和初始化地图
-                            </script>
+                            <table  class="display table table-bordered table-striped table-hover" id="dynamic-table">
+                                <thead>
+            <tr>
+                <th>管理员ID</th>
+                <th>用户名</th>
+                <th>头像</th>
+                <th>密码</th>
+                <th>登录时间</th>
+                <th>登录IP</th>
+                <th>密盐</th>
+                <th>操作</th>
+            </tr>
+                                </thead>
+                                <tbody>
+            <?php if(is_array($data)): foreach($data as $key=>$row): ?><tr>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["id"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["username"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <?php if($row["thumb"] == ''): ?><img src="/Public/images/photos/user-avatar.png" alt="">
+                    <?php else: ?>
+                        <img src="<?php echo ($row["thumb"]); ?>" alt=""><?php endif; ?>
+                   
+                </td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["password"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["last_login_ip"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo date('Y-m-d H:i:s',$row['last_login_time']);?></td>
+                <td style="text-align: center; vertical-align: middle;"><?php echo ($row["salt"]); ?></td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <a href="" class="btn btn-danger">删除</a> <a href="" class="btn btn-info">修改</a>
+                </td>
+            </tr><?php endforeach; endif; ?>
+                                </tbody>
+        </table>
 
 <!--footer section start-->
 <footer>
