@@ -18,6 +18,7 @@ class CheckrbacBehavior extends \Think\Behavior
      */
     public function run(&$params)
     {
+        return;
         // TODO: Implement run() method.
         //当前路径
         $now_url=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
