@@ -208,7 +208,7 @@
                 <td style="text-align: center; vertical-align: middle;"><?php echo date('Y-m-d H:i:s',$row['last_login_time']);?></td>
                 <td style="text-align: center; vertical-align: middle;"><?php echo ($row["salt"]); ?></td>
                 <td style="text-align: center; vertical-align: middle;">
-                    <a href="" class="btn btn-danger">删除</a> <a href="" class="btn btn-info">修改</a>
+                    <a href="<?php echo U('Admin/delete',['id'=>$row['id']]);?>" class="btn btn-danger">删除</a> <a href="" class="btn btn-info">修改</a>
                 </td>
             </tr><?php endforeach; endif; ?>
                                 </tbody>

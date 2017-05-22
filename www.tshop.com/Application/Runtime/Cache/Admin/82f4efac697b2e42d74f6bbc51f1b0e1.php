@@ -181,11 +181,10 @@
         <label for="inputfile">选择头像</label><br>
         <input type="button" class="btn btn-info" value="选择图片">
         <input type="file" id="inputfile" name="photo" style="display: none">
-        <p class="help-block">
+        <div class="help-block">
             <img src="" alt="">
-        </p>
+        </div>
     </div>
-
     <button type="submit" class="btn btn-success">新增</button>
 </form>
 <!--footer section start-->
@@ -234,7 +233,7 @@
         $(this).siblings('input[name=photo]').change(function(){
             var objUrl = getObjectURL(this.files[0]);
             if (objUrl) {
-                $(this).siblings('p').find("img").attr("src", objUrl);
+                $(this).siblings('div').find("img").attr("src", objUrl);
             }
         });
     });
