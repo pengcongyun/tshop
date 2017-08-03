@@ -11,7 +11,7 @@ return array(
     'DB_USER'               =>  'root',      // 用户名
     'DB_PWD'                =>  'root',          // 密码
     'DB_PORT'               =>  '3306',        // 端口
-    'DB_PREFIX'             =>  't_',    // 数据库表前缀
+//    'DB_PREFIX'             =>  't_',    // 数据库表前缀
 
     //默认访问
     'DEFAULT_MODULE'        =>  'Admin',  // 默认模块

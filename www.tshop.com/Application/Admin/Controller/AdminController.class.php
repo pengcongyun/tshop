@@ -70,4 +70,22 @@ class AdminController extends Controller
         }
         $this->success('删除成功',U('Admin/index'));exit;
     }
+    //修改
+    public function update($id){
+        $row=M('admin')->find($id);
+        if(empty($row)){
+            $this->error('数据出错了',U('Admin/index'));exit;
+        }
+        if(IS_POST){
+
+        }
+        $title=[
+            'b_title'=>"管理首页",
+            'm_title'=>"管理员管理",
+            's_title'=>"修改管理员"
+        ];
+        $this->assign('title',$title);
+        $this->assign('row',$row);
+        $this->display('update');
+    }
 }

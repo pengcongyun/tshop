@@ -25,19 +25,17 @@ function uploadone($file){
     }else{
         // 上传成功 获取上传文件信息
         $data['path'] = $info['savepath'].$info['savename'];
-        $data['small_path']=$info['savepath'].'80*80'.$info['savename'];
+        $data['small_path']=$info['savepath'].'80-80'.$info['savename'];
         $img = new \Think\Image(); //实例化
-        $img->open(getcwd().$data['path']); //打开被处理的图片
-        $img->thumb(100,100); //制作缩略图(100*100)
-        $img->save(getcwd().$data['small_path']); //保存缩略图到服务器
+        $img->open(getcwd().$data['path'])->thumb(80,80)->save(getcwd().$data['small_path']); //打开被处理的图片
     }
     return $data;
 }
 //图片缩略图  传入原图
-function thumb($file){
+function tp_thumb($file){
     $image = new \Think\Image();
-    $image->open($file);
-    $thumbPath = $file.'_180'.'.gif';
-    $image->thumb(180, 180)->save($thumbPath);
+    $image->open(getcwd().$file);
+    $thumbPath = $file.'_180'.'.jpg';
+    $image->thumb(180,180)->save(getcwd().$thumbPath);
     return $thumbPath;
 }

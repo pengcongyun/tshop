@@ -19,13 +19,12 @@ class CheckrbacBehavior extends \Think\Behavior
     public function run(&$params)
     {
         // TODO: Implement run() method.
-        return;
+//        return;
         //当前路径
         $now_url=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
         //不用登录的路径
         $no_login_urls=array(
             'Admin/Login/login',
-
         );
         //免登陆
         if(in_array($now_url,$no_login_urls)){
