@@ -1,0 +1,68 @@
+<include file="Public:head" />
+
+<style>
+    .table th {
+        text-align: center;
+        /*height:38px;*/
+        vertical-align: middle;
+    }
+
+</style>
+
+<include file="Public:nav" />
+<!-- page heading start-->
+
+<!-- page heading end-->
+<!-- page heading start-->
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    商品列表
+                    <span class="tools pull-right">
+                                <a href="{:U('add')}" class="btn btn-success btn-link">新增</a>
+                            </span>
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+                        <table  class="display table table-bordered table-striped table-hover" id="dynamic-table">
+                            <thead>
+                            <tr>
+                                <th>商品ID</th>
+                                <th>商品名称</th>
+                                <th>商品分类</th>
+                                <th>性别</th>
+                                <th>爱好hobby</th>
+                                <th>图片</th>
+                                <th>描述</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <foreach name="data" item="row">
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">{$row.id}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{$row.name}</td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        {$row.cid}
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <if condition="$row.sex eq 1">
+                                            男
+                                            <else/>
+                                            女
+                                        </if>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;">{$row.hobby}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{$row.pic}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{$row.description}</td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <a href="{:U('delete',['id'=>$row['id']])}" class="btn btn-danger">删除</a> <a href="{:U('update',['id'=>$row['id']])}" class="btn btn-info">修改</a>
+                                    </td>
+                                </tr>
+                            </foreach>
+                            </tbody>
+                        </table>
+
+<include file="Public:foot" />

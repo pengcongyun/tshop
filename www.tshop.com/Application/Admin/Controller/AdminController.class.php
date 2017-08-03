@@ -77,7 +77,30 @@ class AdminController extends Controller
             $this->error('数据出错了',U('Admin/index'));exit;
         }
         if(IS_POST){
-
+            if($_FILES['newphoto']['name']){
+                $photo=uploadone($_FILES['newphoto']);
+                if($photo['path']){
+                    $_POST['photo']=$photo['path'];
+                    $_POST['thumb']=$photo['small_path'];
+                    if(!empty($_POST['oldphoto'])){
+                        unlink(getcwd().$_POST['oldphoto']);
+                    }
+                    if(!empty($_POST['oldthumb'])){
+                        unlink(getcwd().$_POST['oldthumb']);
+                    }
+                }
+            }
+            if(!empty($_POST['password'])){
+                $_POST['salt']=String::randString(6);
+                $_POST['password']=tp_password($_POST['password'],$_POST['salt']);
+            }else{
+                $_POST['password']=$row['password'];
+            }
+            $res=M('admin')->save($_POST);
+            if($res!==1){
+                $this->error('修改失败',U('admin/index'));exit;
+            }
+            $this->success('修改成功',U('admin/index'));exit;
         }
         $title=[
             'b_title'=>"管理首页",

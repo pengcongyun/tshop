@@ -3,10 +3,63 @@
 
 </style>
 <include file="Public:nav" />
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    添加管理员
+
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">登录名</label>
         <input type="text" class="form-control" value="{$row.username}" name="username" placeholder="请输入管理员">
     </div>
+    <div class="form-group">
+        <label for="name">登录密码</label>
+        <input type="text" class="form-control" name="password" placeholder="请输入新密码">
+    </div>
+    <div class="form-group">
+        <label for="inputfile">选择头像</label><br>
+        <input type="button" class="btn btn-info" value="选择图片">
+        <input type="file" id="inputfile" name="newphoto" style="display: none">
+        <input type="hidden" name="oldphoto" value="{$row.photo}">
+        <input type="hidden" name="oldthumb" value="{$row.thumb}">
+        <div class="help-block">
+            <img src="{$row.thumb}" alt="点击删除" id="del">
+        </div>
+    </div>
+    <input type="hidden" name="id" value="{$row.id}">
+    <button type="submit" class="btn btn-success">修改</button>
 </form>
 <include file="Public:foot" />
+<script>
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+    $('input[type=button]').click(function () {
+        $(this).siblings('input[name=newphoto]').click();
+        $(this).siblings('input[name=newphoto]').change(function(){
+            var objUrl = getObjectURL(this.files[0]);
+            if (objUrl) {
+                $(this).siblings('div').find("img").attr("src", objUrl);
+            }
+        });
+    });
+    $('#del').click(function () {
+        console.log($(this)[0].src);
+    })
+</script>
