@@ -33,7 +33,7 @@ class AdminController extends Controller
                 $photo=uploadone($_FILES['photo']);
                 if($photo['path']){
                     $_POST['photo']=$photo['path'];
-                    $_POST['thumb']=$photo['small_path'];
+                    $_POST['thumb']=tp_thumb($_POST['photo']);
                 }
             }
             $_POST['last_login_ip']=get_client_ip();
@@ -81,7 +81,7 @@ class AdminController extends Controller
                 $photo=uploadone($_FILES['newphoto']);
                 if($photo['path']){
                     $_POST['photo']=$photo['path'];
-                    $_POST['thumb']=$photo['small_path'];
+                    $_POST['thumb']=tp_thumb($_POST['photo']);
                     if(!empty($_POST['oldphoto'])){
                         unlink(getcwd().$_POST['oldphoto']);
                     }

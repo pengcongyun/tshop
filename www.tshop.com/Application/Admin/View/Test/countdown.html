@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时腾讯云短信</title>
+    <style>
+        .phone-nuber-a{
+            display: none;
+        }
+        .phone-nuber-b{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<input type="text" name="email" placeholder="请输入邮箱"><span class="phone-nuber-a">邮箱不能为空</span><br>
+<input type="text" name="phone" placeholder="请输入手机号"><span class="phone-nuber-b">手机号不能为空</span><input disabled="disabled" type="button" id="btn" value="请获取验证码" style="width:100px;height:40px;cursor:text;background-color:rgba(255, 255, 255, 0.85);color:#757575;"><br>
+<input type="submit" id="tijiao">
+</body>
+<script src="_JS_/jquery-1.10.2.min.js"></script>
+<script src="_LAYER_/layer.js"></script>
+
+<script>
+    $(function () {
+        $('input').each(function () {
+            $(this).blur(function () {
+                if ($(this).attr('name') == "email") {
+                    var exp=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+                    if ($(this).val()==''){
+                        $('.phone-nuber-a').show();
+                        return false;
+                    }else{
+                        if(!exp.test($(this).val())){
+                            $('.phone-nuber-a').show();
+                            $('.phone-nuber-a').html('邮箱格式不对');
+                            return false;
+                        }else{
+                            $('.phone-nuber-a').hide();
+                        }
+                    }
+                }
+                if ($(this).attr('name') == "phone") {
+                    if ($(this).val()==''){
+                        $('.phone-nuber-b').show();
+                        $('#btn').css('background-color','rgba(255, 255, 255, 0.85)');
+                        $('#btn').css('color','#757575');
+                        $('#btn').css('cursor','text');
+                        $('#btn').attr('disabled',true);
+                        return false;
+                    }else{
+                        var re = /^1[34578]\d{9}$/;
+                        if (re.test($(this).val())){
+                            $('.phone-nuber-b').hide();
+                            $('#btn').css('background-color','#fe630a');
+                            $('#btn').css('color','#ffffff');
+                            $('#btn').css('cursor','pointer');
+                            $('#btn').attr('disabled',false);
+                        }else{
+                            $('.phone-nuber-b').show();
+                            $('.phone-nuber-b').html('手机号格式不对');
+                            $('#btn').css('background-color','rgba(255, 255, 255, 0.85)');
+                            $('#btn').css('color','#757575');
+                            $('#btn').css('cursor','text');
+                            $('#btn').attr('disabled',true);
+                            return false;
+                        }
+                    }
+                }
+            });
+        });
+    });
+    var wait=120;
+    function time(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.value="请获取验证码";
+            wait = 120;
+
+        } else {
+            o.setAttribute("disabled", true);
+            o.value="重新发送(" + wait + ")";
+            wait--;
+            timer=setTimeout(function() {
+                    time(o)
+                },
+                1000)
+        }
+    }
+    document.getElementById("btn").onclick=function(){
+        var url="{:U('test/sms')}";
+        $.ajax({
+            type:'GET',
+            url:url,
+            data:{phone:$('input[name=phone]').val()},
+            success:function (data) {
+                if(data.result!=0){
+                    layer.alert(data.errmsg);
+                    return false;
+                }else{
+                    layer.alert('发送成功');
+                    time(document.getElementById("btn"));
+                    return false;
+                }
+            },
+            error:function () {
+                alert("异常！");
+            }
+        });
+    };
+    $('#tijiao').click(function () {
+        clearTimeout(timer);
+        $('#btn').css('background-color','rgba(255, 255, 255, 0.85)');
+        $('#btn').css('color','#757575');
+        $('#btn').val('请获取验证码');
+        $('#btn').css('cursor','text');
+        $('#btn').attr('disabled',true);
+        $('input[name=email]').val('');
+        $('input[name=phone]').val('');
+        $('.phone-nuber-b').hide();
+        $('.phone-nuber-a').hide();
+        return false;
+    })
+</script>
+</html>

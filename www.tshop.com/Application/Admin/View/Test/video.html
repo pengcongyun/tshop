@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频上传腾讯云</title>
+</head>
+<body>
+<form action="" method="post" enctype="multipart/form-data">
+    选择视频: <input type="file" name="video">
+    <br>
+    <input type="submit">
+</form>
+</body>
+<script src="_JS_/jquery-1.10.2.min.js"></script>
+<script src="_LAYER_/layer.js"></script>
+<script>
+    $(function () {
+        $('input[name=video]').change(function () {
+            var ext=$(this).val().split('.');
+            var allow="jpg,gif,bmp,jpeg,png,PNG,JPEG,JPG,GIF,BMP";
+            if(allow.indexOf(ext[1])<1){
+                layer.alert('上传格式不允许');
+                $(this).val('');
+            }
+        })
+    })
+</script>
+</html>

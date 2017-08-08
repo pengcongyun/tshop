@@ -45,7 +45,7 @@
                                     <td style="text-align: center; vertical-align: middle;">{$row.id}</td>
                                     <td style="text-align: center; vertical-align: middle;">{$row.name}</td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        {$row.cid}
+                                        {$row.catename}
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">
                                         <if condition="$row.sex eq 1">
@@ -55,14 +55,19 @@
                                         </if>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle;">{$row.hobby}</td>
-                                    <td style="text-align: center; vertical-align: middle;">{$row.pic}</td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <if condition="$row.pic neq ''">
+                                        <img src="{$row.pic}" alt="" style="width: 30px;height: 30px;border-radius: 30px;"></if>
+                                    </td>
                                     <td style="text-align: center; vertical-align: middle;">{$row.description}</td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <a href="{:U('delete',['id'=>$row['id']])}" class="btn btn-danger">删除</a> <a href="{:U('update',['id'=>$row['id']])}" class="btn btn-info">修改</a>
+                                        <a href="{:U('delete',['id'=>$row['id'],'p'=>$_GET['p']])}" class="btn btn-danger">删除</a> <a href="{:U('update',['id'=>$row['id'],'p'=>$_GET['p']])}" class="btn btn-info">修改</a>
                                     </td>
                                 </tr>
                             </foreach>
                             </tbody>
                         </table>
-
+                        <div id="page1" class="page1">
+                            {$page}
+                        </div>
 <include file="Public:foot" />

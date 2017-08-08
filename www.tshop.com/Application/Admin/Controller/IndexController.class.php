@@ -12,4 +12,7 @@ class IndexController extends Controller {
         $this->assign('title',$title);
         $this->display();
     }
+    public function index1(){
+        $this->display();
+    }
 }

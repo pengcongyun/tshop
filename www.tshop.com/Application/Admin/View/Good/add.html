@@ -1,0 +1,85 @@
+<include file="Public:head" />
+<style>
+
+</style>
+<include file="Public:nav" />
+<div class="wrapper">
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    添加商品
+
+                </header>
+                <div class="panel-body">
+                    <div class="adv-table">
+
+                        <form role="form" action="" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">商品名称</label>
+                                <input type="text" class="form-control" name="name" placeholder="请输入商品名称">
+                            </div>
+                            <div class="form-group">
+                                <label for="category_id">商品分类</label>
+                                <select name="category_id" id="">
+                                    <foreach name="cate" item="row">
+                                        <option value="{$row.cid}">{$row.catename}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sex">性别</label>
+                                <input type="radio" name="sex" value="1" checked>男
+                                <input type="radio" name="sex" value="2">女
+                            </div>
+                            <div class="form-group">
+                                <label for="hobby">爱好</label>
+                                <input type="checkbox" name="hobby[]" value="1">精品
+                                <input type="checkbox" name="hobby[]" value="2">新品
+                                <input type="checkbox" name="hobby[]" value="4">热卖
+                            </div>
+                            <div class="form-group">
+                                <label for="description">描述</label>
+                                <textarea name="description" id="container"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputfile">选择图片</label><br>
+                                <input type="button" class="btn btn-info" value="选择图片">
+                                <input type="file" id="inputfile" name="pic" style="display: none">
+                                <div class="help-block">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success">新增</button>
+                        </form>
+                        <include file="Public:foot" />
+                        <script>
+                            //建立一個可存取到該file的url
+                            function getObjectURL(file) {
+                                var url = null;
+                                if (window.createObjectURL != undefined) { // basic
+                                    url = window.createObjectURL(file);
+                                } else if (window.URL != undefined) { // mozilla(firefox)
+                                    url = window.URL.createObjectURL(file);
+                                } else if (window.webkitURL != undefined) { // webkit or chrome
+                                    url = window.webkitURL.createObjectURL(file);
+                                }
+                                return url;
+                            }
+                            $('input[type=button]').click(function () {
+                                $(this).siblings('input[name=pic]').click();
+                                $(this).siblings('input[name=pic]').change(function(){
+                                    var objUrl = getObjectURL(this.files[0]);
+                                    if (objUrl) {
+                                        $(this).siblings('div').find("img").attr("src", objUrl);
+                                    }
+                                });
+                            });
+                        </script>
+                        <block name="js">
+                            <js href="_UEDITOR_/ueditor.config.js" />
+                            <js href="_UEDITOR_/ueditor.all.js" />
+                            <script type="text/javascript">
+                                var ue = UE.getEditor('container');
+                            </script>
+                        </block>
