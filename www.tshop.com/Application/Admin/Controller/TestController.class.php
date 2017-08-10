@@ -30,12 +30,13 @@ class TestController extends Controller
                 $name = time() . '_' . rand(1000, 9999) . '.' . pathinfo($_FILES['video']['name'], PATHINFO_EXTENSION);
                 $last_name = SITE_PATH . 'Upload/video/' . $name;
                 $rs = move_uploaded_file($_FILES['video']['tmp_name'], $last_name);
-                //上传腾讯云
-                //if ($rs) {
-                //    $video = unploadVod($last_name);
-                //}
+//                上传腾讯云
+                if ($rs) {
+                    $video = unploadVod($last_name);
+                }
                 //普通保存
-                $video=$last_name;
+//                $video=$last_name;
+                var_dump($video);exit;
             }
         }
         $this->display();
