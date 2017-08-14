@@ -31,9 +31,9 @@ class LoginController extends Controller
             $res=D('admin')->where(['username'=>I('post.username')])->save(['last_login_time'=>time(),'last_login_ip'=>get_client_ip()]);
             //验证是否记住登录 存个4小时
             if(I('post.check')==1){
-                cookie('adminname',$data,4*60*60);
+                cookie('admin',$data,4*60*60);
             }else{
-                cookie('adminname',$data,60*60);
+                cookie('admin',$data,60*60);
             }
             $this->success('登录成功',U('Index/index'));exit;
         }

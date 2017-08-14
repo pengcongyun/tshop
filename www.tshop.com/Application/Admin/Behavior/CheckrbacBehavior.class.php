@@ -31,12 +31,14 @@ class CheckrbacBehavior extends \Think\Behavior
             return;
         }
         //身份未过期
-        $admin=cookie('adminname');
-        if(!empty($admin)){
-            return;
-        }
-        else{
+        $admin=cookie('admin');
+        if(empty($admin)){
             redirect(U('Login/login'),3,'请先登录才能访问');exit;
         }
+        //查看权限
+//        $permissions = M()->table('admin_role ar')->join('role_permission rp on ar.role_id=rp.role_id')->join('permission p ON p.id=permission_id')->where($cond)->getField('id,path');
+        $permissions=M('auth_group_access')->where(['uid'=>$admin['id']])->getField('group_id');
+
+        var_dump($permissions);exit;
     }
 }
