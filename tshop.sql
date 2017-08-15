@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-14 18:01:51
+Date: 2017-08-15 17:13:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,68 +29,27 @@ CREATE TABLE `admin` (
   `photo` varchar(255) DEFAULT NULL,
   `thumb` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'admin', 'c3e2a08e7d6c84ffa913e5cd23c5efcc', '1502704610', '127.0.0.1', 'abc', null, null);
-INSERT INTO `admin` VALUES ('10', 'x', 'e037e8ac019f3980c6f18afd85fa6c67', '1501840052', '127.0.0.1', 'WLGCB', '/Upload/2017-08-04/598442b4dc3eb.jpg', '/Upload/2017-08-04/598442b4dc3eb180_180.jpg');
+INSERT INTO `admin` VALUES ('1', 'admin', '8b667638d747acdce3dd6ce2d41e12d1', '1502787328', '127.0.0.1', 'YNyKH', null, null);
 
 -- ----------------------------
--- Table structure for auth_group
+-- Table structure for admin_role
 -- ----------------------------
-DROP TABLE IF EXISTS `auth_group`;
-CREATE TABLE `auth_group` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `title` char(100) NOT NULL DEFAULT '',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `rules` char(80) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `admin_role`;
+CREATE TABLE `admin_role` (
+  `admin_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`admin_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of auth_group
+-- Records of admin_role
 -- ----------------------------
-INSERT INTO `auth_group` VALUES ('1', '超级管理员', '1', '1,2');
-
--- ----------------------------
--- Table structure for auth_group_access
--- ----------------------------
-DROP TABLE IF EXISTS `auth_group_access`;
-CREATE TABLE `auth_group_access` (
-  `uid` mediumint(8) unsigned NOT NULL,
-  `group_id` mediumint(8) unsigned NOT NULL,
-  UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
-  KEY `uid` (`uid`),
-  KEY `group_id` (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of auth_group_access
--- ----------------------------
-INSERT INTO `auth_group_access` VALUES ('1', '1');
-
--- ----------------------------
--- Table structure for auth_rule
--- ----------------------------
-DROP TABLE IF EXISTS `auth_rule`;
-CREATE TABLE `auth_rule` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `name` char(80) NOT NULL DEFAULT '',
-  `title` char(20) NOT NULL DEFAULT '',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `condition` char(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of auth_rule
--- ----------------------------
-INSERT INTO `auth_rule` VALUES ('1', 'Admin/Index/index', '首页', '1', '');
-INSERT INTO `auth_rule` VALUES ('2', 'Admin/Test/countdown', '倒计时', '1', '');
-INSERT INTO `auth_rule` VALUES ('3', 'Admin/Test/video', '视频上传', '1', '');
+INSERT INTO `admin_role` VALUES ('1', '1');
 
 -- ----------------------------
 -- Table structure for category
@@ -130,3 +89,64 @@ CREATE TABLE `good` (
 INSERT INTO `good` VALUES ('5', '18945454545', '1', '1', null, null, '<p>想</p>');
 INSERT INTO `good` VALUES ('2', 'xxx', '2', '1', null, null, 'ff');
 INSERT INTO `good` VALUES ('3', 'x', '2', '2', null, null, 'fjdsal');
+
+-- ----------------------------
+-- Table structure for permission
+-- ----------------------------
+DROP TABLE IF EXISTS `permission`;
+CREATE TABLE `permission` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `lft` int(255) DEFAULT NULL,
+  `rgt` int(255) DEFAULT NULL,
+  `level` varchar(255) DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of permission
+-- ----------------------------
+INSERT INTO `permission` VALUES ('1', '0', '后台首页', '1', '2', '1', 'Admin/Index/index');
+INSERT INTO `permission` VALUES ('2', '0', '各种测试', '9', '14', '1', '');
+INSERT INTO `permission` VALUES ('3', '2', '倒计时js', '10', '11', '2', 'Admin/Test/countdown');
+INSERT INTO `permission` VALUES ('5', '0', '权限管理', '3', '8', '1', '');
+INSERT INTO `permission` VALUES ('6', '5', '权限列表', '4', '5', '2', 'Admin/Permission/index');
+INSERT INTO `permission` VALUES ('7', '5', '角色列表', '6', '7', '2', 'Admin/Role/index');
+
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `intro` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES ('1', '超级管理员', '所有权限');
+INSERT INTO `role` VALUES ('2', '普通管理员', '视情况而定');
+
+-- ----------------------------
+-- Table structure for role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `role_permission`;
+CREATE TABLE `role_permission` (
+  `role_id` int(10) DEFAULT NULL,
+  `permission_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of role_permission
+-- ----------------------------
+INSERT INTO `role_permission` VALUES ('1', '6');
+INSERT INTO `role_permission` VALUES ('1', '5');
+INSERT INTO `role_permission` VALUES ('1', '1');
+INSERT INTO `role_permission` VALUES ('1', '7');
+INSERT INTO `role_permission` VALUES ('1', '2');
+INSERT INTO `role_permission` VALUES ('1', '3');

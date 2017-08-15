@@ -1,0 +1,24 @@
+<extend name="Public:index" />
+<block name="content">
+    <h1 style="text-align: center">角色列表</h1>
+    <a href="{:U('add')}" class="btn btn-primary">添加角色</a>
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>角色ID</th>
+            <th>角色名称</th>
+            <th>角色介绍</th>
+            <th>操作</th>
+        </tr>
+        <foreach name="data" item="row">
+            <tr>
+                <td>{$row.role_id}</td>
+                <td>{$row.name}</td>
+                <td>{$row.intro}</td>
+                <td>
+                    <a href="{:U('delete',['id'=>$row['role_id']])}">删除</a>
+                    <a href="{:U('edit',['id'=>$row['role_id']])}">修改</a>
+                </td>
+            </tr>
+        </foreach>
+    </table>
+</block>

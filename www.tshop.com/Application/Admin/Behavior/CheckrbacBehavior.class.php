@@ -36,9 +36,14 @@ class CheckrbacBehavior extends \Think\Behavior
             redirect(U('Login/login'),3,'请先登录才能访问');exit;
         }
         //查看权限
-//        $permissions = M()->table('admin_role ar')->join('role_permission rp on ar.role_id=rp.role_id')->join('permission p ON p.id=permission_id')->where($cond)->getField('id,path');
-        $permissions=M('auth_group_access')->where(['uid'=>$admin['id']])->getField('group_id');
+        $cond = [
+            'admin_id'=>$admin['id'],
+        ];
+        $permissions = M()->table('admin_role ar')->join('role_permission rp on ar.role_id=rp.role_id')->join('permission p ON p.id=permission_id')->where($cond)->getField('id,path');
+        if(!in_array($now_url,$permissions)){
+            redirect(U('Admin/Index/index'),3,'你么有权限,去首页吧');exit;
+        }
 
-        var_dump($permissions);exit;
+//        var_dump($permissions);exit;
     }
 }

@@ -1,0 +1,76 @@
+<extend name="Public:index" />
+<block name="content">
+    <h1 style="text-align: center">添加角色</h1>
+    <form role="form" method="post" action="{:U('')}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="exampleInputPassword1">角色名称</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="请填写角色名称" name="name" value="{$row.name}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">角色介绍</label>
+            <textarea class="form-control" name="intro" placeholder="请填写角色简介">{$row.intro}</textarea>
+        </div>
+        <!--关联权限-->
+        <div class="form-group">
+            <label for="">关联权限</label>
+            <div id="permission-ids">
+            </div>
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+        <!--如果存在id-->
+        <present name="row">
+            <input type="hidden" name="id" value="{$row.role_id}">
+            <input type="submit" class="btn btn-primary" value="提交更新">
+            <else/>
+            <input type="submit" class="btn btn-primary" value="提交新增">
+        </present>
+    </form>
+</block>
+<block name="css">
+    <link rel="stylesheet" href="_ZTREE_/css/zTreeStyle/zTreeStyle.css" type="text/css">
+</block>
+<block name="js">
+    <script src="_LAYER_/layer.js"></script>
+    <script type="text/javascript" src="_ZTREE_/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="_ZTREE_/js/jquery.ztree.excheck.js"></script>
+    <script type='text/javascript'>
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    pIdKey: "parent_id",
+                }
+            },
+            callback: {
+                onCheck: function () {
+                    //获取所有被勾选的节点
+                    var nodes = ztreeObj.getCheckedNodes(true);
+                    var permissions_node = $('#permission-ids');
+                    permissions_node.empty();
+                    $(nodes).each(function (i, v) {
+                        var id = v.id;
+                        var html = '<input type="hidden" name="permission_id[]" value="' + id + '"/>';
+                        $(html).appendTo(permissions_node);
+                    });
+                },
+            },
+        };
+        var zNodes = {$permissions};
+        var ztreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        //展开所有节点.
+        ztreeObj.expandAll(true);
+
+        <present name='row'>
+        //获取所有被关联的权限
+        var permission_ids = {$row.permission_ids};
+        //找到每一个节点对象,然后再选中
+        $(permission_ids).each(function (i, v) {
+            var node = ztreeObj.getNodeByParam('id', v);
+            ztreeObj.checkNode(node,true,false,true);
+        });
+        </present>
+    </script>
+</block>

@@ -1,0 +1,26 @@
+<extend name="Public:index" />
+<block name="content">
+    <h1 style="text-align: center">权限列表</h1>
+    <a href="{:U('add')}" class="btn btn-primary">添加权限</a>
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>编号ID</th>
+            <th>权限名称</th>
+            <th>权限路径</th>
+            <th>父类</th>
+            <th class="hidden-phone">操作</th>
+        </tr>
+        <foreach name="data" item="row">
+            <tr>
+                <td>{$row.id}</td>
+                <td>{:str_repeat('&emsp;&emsp;',$row['level']-1)}{$row.name}</td>
+                <td>{$row.path}</td>
+                <td>{$row.parent_id}</td>
+                <td>
+                    <a href="{:U('delete',['id'=>$row['id']])}">删除</a>
+                    <a href="{:U('edit',['id'=>$row['id']])}">修改</a>
+                </td>
+            </tr>
+        </foreach>
+    </table>
+</block>

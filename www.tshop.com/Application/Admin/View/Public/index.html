@@ -9,7 +9,9 @@
     <link rel="shortcut icon" href="#" type="image/png">
 
     <title>后台管理</title>
+    <block name="css">
 
+    </block>
     <!--common-->
     <link href="_CSS_/style.css" rel="stylesheet">
     <link href="_CSS_/style-responsive.css" rel="stylesheet">
@@ -92,16 +94,17 @@
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>权限管理</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="{:U('Permission/index')}"> 权限列表</a></li>
-                        <li><a href="{:U('Role/index')}"> 角色列表</a></li>
                         <li><a href="{:U('Admin/index')}"> 管理员管理</a></li>
+                        <li><a href="{:U('Role/index')}"> 角色列表</a></li>
+                        <li><a href="{:U('Permission/index')}"> 权限列表</a></li>
                         <li><a href="{:U('Menu/index')}"> 菜单管理</a></li>
                     </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>各种测试</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="{:U('Test/countdown')}"> 倒计时js</a></li>
-
+                        <li><a href="{:U('Test/video')}"> 腾讯视频</a></li>
+                        <li><a href="{:U('Test/morepic')}"> 多图片上传</a></li>
                     </ul>
                 </li>
             </ul>

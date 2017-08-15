@@ -44,6 +44,11 @@ class AdminController extends Controller
             if($res===false){
                 $this->error('添加管理员信息失败');exit;
             }
+            $data=[
+                'admin_id'=>$res,
+                'role_id'=>$_POST['role_id'],
+            ];
+            M('AdminRole')->add($data);
             $this->success('添加管理员成功',U('Admin/index'));exit;
         }
         $title=[
@@ -51,6 +56,7 @@ class AdminController extends Controller
             'm_title'=>"管理员管理",
             's_title'=>"新增管理员"
         ];
+        $this->assign('roles',M('Role')->select());
         $this->assign('title',$title);
         $this->display();
     }
@@ -64,15 +70,24 @@ class AdminController extends Controller
         $front=getcwd();
         unlink($front.$res['thumb']);
         unlink($front.$res['photo']);
-        $r=M('Admin')->delete($id);
-        if($r===false){
+        M('Admin')->startTrans();
+        //删除管理员 角色关联
+        $result=M('AdminRole')->where(['admin_id'=>$id])->delete();
+        if($result===false){
+            M('Admin')->rollback();
             $this->error('删除失败',U('Admin/index'));exit;
         }
+        $r=M('Admin')->delete($id);
+        if($r===false){
+            M('Admin')->rollback();
+            $this->error('删除失败',U('Admin/index'));exit;
+        }
+        M('Admin')->commit();
         $this->success('删除成功',U('Admin/index'));exit;
     }
     //修改
     public function update($id){
-        $row=M('admin')->find($id);
+        $row=M('admin a')->join('admin_role r on a.id=r.admin_id')->where(['id'=>$id])->find();
         if(empty($row)){
             $this->error('数据出错了',U('Admin/index'));exit;
         }
@@ -100,6 +115,10 @@ class AdminController extends Controller
             if($res!==1){
                 $this->error('修改失败',U('admin/index'));exit;
             }
+            $data=[
+                'role_id'=>$_POST['role_id'],
+            ];
+            M('AdminRole')->where(['admin_id'=>$id])->save($data);
             $this->success('修改成功',U('admin/index'));exit;
         }
         $title=[
@@ -107,6 +126,7 @@ class AdminController extends Controller
             'm_title'=>"管理员管理",
             's_title'=>"修改管理员"
         ];
+        $this->assign('roles',M('Role')->select());
         $this->assign('title',$title);
         $this->assign('row',$row);
         $this->display('update');
