@@ -26,7 +26,7 @@ class PermissionController extends Controller
             if(D('Permission')->addPermission()===false){
                 $this->error(get_errors(D('Permission')));exit;
             }
-            $this->success('添加成功',U('index'));exit;
+            $this->success('添加成功',U('add'));exit;
         }
         $this->_beforeView();
         $this->display('add');
