@@ -22,9 +22,13 @@ class CheckrbacBehavior extends \Think\Behavior
 //        return;
         //当前路径
         $now_url=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
+        echo $now_url;
         //不用登录的路径
         $no_login_urls=array(
             'Admin/Login/login',
+            'Admin/Upload/upload',
+            'Admin/Upload/delete',
+            'Admin/Upload/cjupload',
         );
         //免登陆
         if(in_array($now_url,$no_login_urls)){

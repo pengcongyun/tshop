@@ -72,7 +72,7 @@
                 $.ajax({
                     processData: false,
                     contentType: false,
-                    url : '{:U("Upload/upload")}',
+                    url : '{:U("Admin/Upload/upload")}',
                     type : 'post',
                     data : fd,
                     success : function(data){
@@ -99,7 +99,7 @@
             var flag = true;//是否要删除
             //回显删除
             if(path_id){
-                var url = '{:U("Upload/delete")}';
+                var url = '{:U("Admin/Upload/delete")}';
                 var data = {id:path_id};
                 $.getJSON(url,data,function(response) {
                     if(response.status){
@@ -108,7 +108,7 @@
                 });
             }else{
                 //上传不如意删除
-                var url = '{:U("Upload/delete")}';
+                var url = '{:U("Admin/Upload/delete")}';
                 var data={pic:pic};
                 $.getJSON(url,data,function(response) {
                     if(response.status==2){

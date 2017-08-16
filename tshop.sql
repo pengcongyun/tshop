@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-15 17:13:49
+Date: 2017-08-16 17:56:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'admin', '8b667638d747acdce3dd6ce2d41e12d1', '1502787328', '127.0.0.1', 'YNyKH', null, null);
+INSERT INTO `admin` VALUES ('1', 'admin', '53d6b398e9ee18c20df4cc799c9b458e', '1502863670', '127.0.0.1', 'YNyKH', null, null);
 
 -- ----------------------------
 -- Table structure for admin_role
@@ -103,17 +103,35 @@ CREATE TABLE `permission` (
   `level` varchar(255) DEFAULT NULL,
   `path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission
 -- ----------------------------
 INSERT INTO `permission` VALUES ('1', '0', '后台首页', '1', '2', '1', 'Admin/Index/index');
-INSERT INTO `permission` VALUES ('2', '0', '各种测试', '9', '14', '1', '');
-INSERT INTO `permission` VALUES ('3', '2', '倒计时js', '10', '11', '2', 'Admin/Test/countdown');
-INSERT INTO `permission` VALUES ('5', '0', '权限管理', '3', '8', '1', '');
-INSERT INTO `permission` VALUES ('6', '5', '权限列表', '4', '5', '2', 'Admin/Permission/index');
-INSERT INTO `permission` VALUES ('7', '5', '角色列表', '6', '7', '2', 'Admin/Role/index');
+INSERT INTO `permission` VALUES ('2', '0', '各种测试', '29', '38', '1', '');
+INSERT INTO `permission` VALUES ('3', '2', '倒计时js', '30', '31', '2', 'Admin/Test/countdown');
+INSERT INTO `permission` VALUES ('8', '5', '管理员列表', '20', '27', '2', 'Admin/Admin/index');
+INSERT INTO `permission` VALUES ('5', '0', '权限管理', '3', '28', '1', '');
+INSERT INTO `permission` VALUES ('6', '5', '权限列表', '4', '11', '2', 'Admin/Permission/index');
+INSERT INTO `permission` VALUES ('7', '5', '角色列表', '12', '19', '2', 'Admin/Role/index');
+INSERT INTO `permission` VALUES ('9', '8', '添加管理员', '21', '22', '3', 'Admin/Admin/add');
+INSERT INTO `permission` VALUES ('10', '8', '修改管理员', '23', '24', '3', 'Admin/Admin/edit');
+INSERT INTO `permission` VALUES ('11', '8', '删除管理员', '25', '26', '3', 'Admin/Admin/delete');
+INSERT INTO `permission` VALUES ('12', '7', '添加角色', '13', '14', '3', 'Admin/Role/add');
+INSERT INTO `permission` VALUES ('13', '7', '修改角色', '15', '16', '3', 'Admin/Role/edit');
+INSERT INTO `permission` VALUES ('14', '7', '删除角色', '17', '18', '3', 'Admin/Role/delete');
+INSERT INTO `permission` VALUES ('15', '6', '添加权限', '5', '6', '3', 'Admin/Permission/add');
+INSERT INTO `permission` VALUES ('16', '6', '修改权限', '7', '8', '3', 'Admin/Permission/edit');
+INSERT INTO `permission` VALUES ('17', '6', '删除权限', '9', '10', '3', 'Admin/Permission/delete');
+INSERT INTO `permission` VALUES ('18', '2', '腾讯视频', '34', '35', '2', 'Admin/Test/video');
+INSERT INTO `permission` VALUES ('19', '2', '多图片上传', '36', '37', '2', 'Admin/Test/morepic');
+INSERT INTO `permission` VALUES ('20', '0', '商品管理', '39', '48', '1', '');
+INSERT INTO `permission` VALUES ('21', '20', '商品列表', '40', '47', '2', 'Admin/Good/index');
+INSERT INTO `permission` VALUES ('22', '21', '添加商品', '41', '42', '3', 'Admin/Good/add');
+INSERT INTO `permission` VALUES ('23', '21', '修改商品', '43', '44', '3', 'Admin/Good/update');
+INSERT INTO `permission` VALUES ('24', '21', '删除商品', '45', '46', '3', 'Admin/Good/delete');
+INSERT INTO `permission` VALUES ('25', '0', '图片上传ajax', '49', '50', '1', 'Admin/Upload/upload');
 
 -- ----------------------------
 -- Table structure for role
@@ -144,9 +162,27 @@ CREATE TABLE `role_permission` (
 -- ----------------------------
 -- Records of role_permission
 -- ----------------------------
+INSERT INTO `role_permission` VALUES ('1', '24');
+INSERT INTO `role_permission` VALUES ('1', '23');
+INSERT INTO `role_permission` VALUES ('1', '22');
+INSERT INTO `role_permission` VALUES ('1', '21');
+INSERT INTO `role_permission` VALUES ('1', '20');
+INSERT INTO `role_permission` VALUES ('1', '19');
+INSERT INTO `role_permission` VALUES ('1', '18');
+INSERT INTO `role_permission` VALUES ('1', '3');
+INSERT INTO `role_permission` VALUES ('1', '2');
+INSERT INTO `role_permission` VALUES ('1', '11');
+INSERT INTO `role_permission` VALUES ('1', '10');
+INSERT INTO `role_permission` VALUES ('1', '9');
+INSERT INTO `role_permission` VALUES ('1', '8');
+INSERT INTO `role_permission` VALUES ('1', '14');
+INSERT INTO `role_permission` VALUES ('1', '13');
+INSERT INTO `role_permission` VALUES ('1', '12');
+INSERT INTO `role_permission` VALUES ('1', '7');
+INSERT INTO `role_permission` VALUES ('1', '17');
+INSERT INTO `role_permission` VALUES ('1', '16');
+INSERT INTO `role_permission` VALUES ('1', '15');
 INSERT INTO `role_permission` VALUES ('1', '6');
 INSERT INTO `role_permission` VALUES ('1', '5');
 INSERT INTO `role_permission` VALUES ('1', '1');
-INSERT INTO `role_permission` VALUES ('1', '7');
-INSERT INTO `role_permission` VALUES ('1', '2');
-INSERT INTO `role_permission` VALUES ('1', '3');
+INSERT INTO `role_permission` VALUES ('1', '25');
