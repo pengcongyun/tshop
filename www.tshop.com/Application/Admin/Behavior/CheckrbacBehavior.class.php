@@ -19,7 +19,7 @@ class CheckrbacBehavior extends \Think\Behavior
     public function run(&$params)
     {
         // TODO: Implement run() method.
-        return;
+//        return;
         //当前路径
         $now_url=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
         echo $now_url;
@@ -29,6 +29,7 @@ class CheckrbacBehavior extends \Think\Behavior
             'Admin/Upload/upload',
             'Admin/Upload/delete',
             'Admin/Upload/cjupload',
+            'Admin/Login/logout',
         );
         //免登陆
         if(in_array($now_url,$no_login_urls)){

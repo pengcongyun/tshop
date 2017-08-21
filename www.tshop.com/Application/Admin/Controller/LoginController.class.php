@@ -11,7 +11,7 @@ use Think\Controller;
 class LoginController extends Controller
 {
     public function login(){
-        if(!empty(cookie('adminname'))){
+        if(!empty(cookie('admin'))){
             redirect(U('Index/index'));exit;
         }
         if(IS_POST){
