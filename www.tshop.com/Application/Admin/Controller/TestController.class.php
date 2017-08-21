@@ -46,4 +46,23 @@ class TestController extends Controller
 
         $this->display();
     }
+    //百度分享
+    public function baidushare(){
+        $this->display();
+    }
+    //动画效果html5
+    public function move(){
+        $this->display('move');
+    }
+    //jquery cookie
+    public function jqcookie(){
+        $this->display('jqcookie');
+    }
+    //h5 表单
+    public function formh5(){
+        if(IS_POST){
+            var_dump($_POST);exit;
+        }
+        $this->display('formh5');
+    }
 }
