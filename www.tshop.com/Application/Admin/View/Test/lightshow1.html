@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"  />
+    <script type="text/javascript" src="_JS_/jquery.js"></script>
+    <script type = "text/javascript">
+        function scroll_news(){
+            var firstNode = $('#scroll-container li'); //获取li对象
+            firstNode.eq(0).fadeOut("slow", function(){ //获取li的第一个,执行fadeOut,并且call - function.
+                $(this).clone().appendTo($(this).parent()).show(); //把每次的li的第一个 克隆，然后添加到父节点 对象。
+                $(this).remove();//最后  把每次的li的第一个 去掉。
+            });
+        }
+        setInterval('scroll_news()',2000);//每隔0.5秒，执行scroll_news()
+    </script>
+</head>
+<body >
+<div id="scroll-container" style="height:260px;width:640px;overflow: hidden;">
+    <li><img src="_IMG_/dogis1.jpg" width="640" height="287" /></li>
+    <li><img src="_IMG_/dogis2.jpg" width="640" height="297" /></li>
+    <li><img src="_IMG_/dogis3.jpg" width="640" height="297" /></li>
+</div>
+</body>
+</html>

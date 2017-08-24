@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jquery幻灯片简单实现方法</title>
+    <SCRIPT type=text/javascript src="_JS_/jquery.js"></SCRIPT>
+    <SCRIPT>
+        //<![CDATA[
+        $(function(){
+            (function(){
+                var curr = 0;
+                $("#jsNav .trigger").each(function(i){
+                    $(this).click(function(){
+                        curr = i;
+                        $("#js img").eq(i).fadeIn("slow").siblings("img").hide();
+                        $(this).siblings(".trigger").removeClass("imgSelected").end().addClass("imgSelected");
+                        return false;
+                    });
+                });
+
+                var pg = function(flag){
+                    //flag:true表示前翻， false表示后翻
+                    if (flag) {
+                        if (curr == 0) {
+                            todo = 2;
+                        } else {
+                            todo = (curr - 1) % 3;
+                        }
+                    } else {
+                        todo = (curr + 1) % 3;
+                    }
+                    $("#jsNav .trigger").eq(todo).click();
+                };
+
+                //前翻
+                $("#prev").click(function(){
+                    pg(true);
+                    return false;
+                });
+
+                //后翻
+                $("#next").click(function(){
+                    pg(false);
+                    return false;
+                });
+
+                //自动翻
+                var timer = setInterval(function(){
+                    todo = (curr + 1) % 3;
+                    $("#jsNav .trigger").eq(todo).click();
+                },4000);
+
+                //鼠标悬停在触发器上时停止自动翻
+                $("#jsNav a").hover(function(){
+                        clearInterval(timer);
+                    },
+                    function(){
+                        timer = setInterval(function(){
+                            todo = (curr + 1) % 3;
+                            $("#jsNav .trigger").eq(todo).click();
+                        },1500);
+                    }
+                );
+            })();
+        });
+        //]]>
+    </SCRIPT>
+
+</head>
+
+<body style="text-align:center">
+
+<!--js开始 -->
+<DIV id=js class="js">
+    <IMG alt="" src="_IMG_/dogis1.jpg">
+    <IMG style="DISPLAY: none" alt="" src="_IMG_/dogis2.jpg">
+    <IMG style="DISPLAY: none" alt="" src="_IMG_/dogis3.jpg">
+    <DIV id=jsNav class=jsNav>
+        <A id=prev class=prevBtn href="javascript:void(0)"></A>
+        <A class="trigger imgSelected" href="javascript:void(0)">1</A>
+        <A class=trigger href="javascript:void(0)">2</A>
+        <A class=trigger href="javascript:void(0)">3</A>
+        <A id=next class=nextBtn href="javascript:void(0)"></A>
+    </DIV>
+</DIV>
+<!--js结束-->
+</body>
+</html>

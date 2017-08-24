@@ -27,8 +27,37 @@ novalidate取消验证 <br>
     </select>
     <br>
     <input type="submit"><br>
-    <img src="https://www.doggod.cn/images/banner/595f42dbc6363.jpg" alt="">
-
+    <!--<img src="http://index.doggod.cn/img/distribute.jpg" alt=""><br>-->
+    输入金额转为大写 <br>
+    <input type="text" id="idNumber"><br><input type="text" id="idCHN">
 </form>
 </body>
+<script src="_JS_/jquery.js"></script>
+<script>
+    // 将输入的数字金额转换成对应的中文大写金额
+    // idNumber输入的数字金额，idCHN输出的中文大写金额
+    function TransformNumberIntoCHN(idNumber, idCHN) {
+        var number = document.getElementById(idNumber).value;
+        if (!/^(0|[1-9]\d*)(\.\d{1,2})?$/.test(number)) {
+            document.getElementById(idCHN).value = "";
+            document.getElementById(idNumber).value = "";
+            return false;
+        }
+        var unit = "仟佰拾亿仟佰拾万仟佰拾元角分", str = "";
+        number += "00";
+        var point = number.indexOf('.');
+        if (point >= 0) {
+            number = number.substring(0, point) + number.substr(point + 1, 2);
+        }
+        unit = unit.substr(unit.length - number.length);
+        for (var i = 0; i < number.length; i++) {
+            str += '零壹贰叁肆伍陆柒捌玖'.charAt(number.charAt(i)) + unit.charAt(i);
+        }
+        //document.getElementById(idCHN).value = str.replace(/零(仟|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
+        document.getElementById(idCHN).value = str.replace(/零(仟|佰|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整");
+    }
+    $('#idNumber').blur(function () {
+        TransformNumberIntoCHN('idNumber', 'idCHN');
+    })
+</script>
 </html>
