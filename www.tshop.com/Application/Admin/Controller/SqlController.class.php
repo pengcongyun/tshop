@@ -37,6 +37,42 @@ class SqlController extends Controller
         }
         var_dump('ok');exit;
     }
-    //
+    //数据表导出
+    public function export(){
+// 导出数据到excel表的路径
+        $excelPath = __DIR__.'/dbsource.xlsx';
+        vendor('excel.PHPExcel');
 
+        // 需要将admin数据表中的数据导入到Excel表中
+        $rows = M('role')->select();
+
+        // 1. 新建excel表
+        $excel = new \PHPExcel();
+        $sheet = $excel->getActiveSheet();
+        $sheet->setTitle('admin数据备份');
+        $sheet->setCellValue('A1', '角色id')
+            ->setCellValue('B1', '角色名称')
+            ->setCellValue('C1','描述');
+
+        // 第一行是表头，第二行开始导入Excel表中
+        $line = 1;
+        foreach ($rows as $field) {
+            $line++;
+            $sheet->setCellValue('A'.$line, $field['role_id'])
+                ->setCellValue('B'.$line, $field['name'])
+                ->setCellValue('C'.$line, $field['intro']);
+        }
+        $excel2007 = \PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $res=$excel2007->save($excelPath);
+        echo '导出成功';exit;
+    }
+    //导入表
+
+    //sql查询
+    public function search(){
+        $where=[];
+        $datas1=M('admin')->field("b.*,admin.password as pwd")->where($where)->join("admin_role as b ON admin.id=b.admin_id")->select();
+        $this->assign('datas1',$datas1);
+        $this->display();
+    }
 }

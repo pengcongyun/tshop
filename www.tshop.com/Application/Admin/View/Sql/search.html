@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>奇异查询</title>
+</head>
+<body>
+<h1>查询</h1>
+<div style="border: 1px black solid">
+    <div style="font-size: large;color: red;border: 1px blue dashed">
+        M('admin')->field("b.*,admin.password as pwd")->where($where)->join("admin_role as b ON admin.id=b.admin_id")->select();
+    </div>
+    <div>
+        {:print_r($datas1)}
+    </div>
+    <div style="font-size: large;color: red;border: 1px blue dashed">
+        M('admin')->find($id);
+    </div>
+    <div style="font-size: large;color: red;border: 1px blue dashed">
+        $counts = M()->table('student')->count();// 总条数
+    </div>
+</div>
+<h1>更新</h1>
+<div style="border: 1px black solid">
+    <div style="font-size: large;color: green;border: 1px green dashed">
+        $result=M('Admin')->where('id='.$id)->save(array('status'=>2));
+    </div>
+    <div style="font-size: large;color: green;border: 1px green dashed">
+        $result=M('Admin')->save($data)  //数据内有ID;
+    </div>
+    <div style="font-size: large;color: green;border: 1px green dashed">
+        $result=M('Admin')->where('id='.$id)->save($data)  //数据内有ID;
+    </div>
+    <div style="font-size: large;color: green;border: 1px green dashed">
+        $result=M('Admin')->setInc('score','id=5',3 ); ID为5  score自增3  <br>
+        $result=M('Admin')->where('id=5')->setInc('score',3);
+    </div>
+    <div style="font-size: large;color: green;border: 1px green dashed">
+        $result=M('Admin')->setDec('score','id=5',3 ); ID为5  score自减3 <br>
+        $result=M('Admin')->where('id=5')->setDec('score',3);
+    </div>
+</div>
+<h1>添加</h1>
+<div style="border: 1px black solid">
+    <div style="font-size: large;color: green">
+        $result = M('GoodsCates')->add($data);
+    </div>
+
+</div>
+<h1>删除</h1>
+<div style="border: 1px black solid">
+    <div style="font-size: large;color: green">
+        $result = M('GoodsCates')->delete($id);
+    </div>
+
+</div>
+</body>
+</html>
