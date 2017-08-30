@@ -10,6 +10,9 @@
             randomColours: true,
             width: 244,
             height: 163,
+            // width:122,
+            // height:81,
+
             colour1: null,
             colour2: null,
             font: 'normal 40px "Comic Sans MS", cursive, sans-serif',
@@ -136,7 +139,8 @@
 
             _generateRandomText: function() {
                 this._settings.text = '';
-                var length = Math.floor((Math.random() * 3) + 6);
+                // var length = Math.floor((Math.random() * 3) + 6);
+                var length = Math.floor(5);
                 for (var i = 0; i < length; i++) {
                     this._settings.text += possibleCharacters.charAt(Math.floor(Math.random() * possibleCharacters.length));
                 }

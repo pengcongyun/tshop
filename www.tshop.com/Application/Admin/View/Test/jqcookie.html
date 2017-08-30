@@ -33,7 +33,14 @@
                     }
                 }, 1000);
             }
-
+            $('#mobile').blur(function () {
+                var reg=/^1[34578]\d{9}$/;
+                if(reg.test($(this).val())){
+                    $('#getting').attr('disabled',false);
+                }else {
+                    $('#getting').attr('disabled',true);
+                }
+            });
 
             $('#getting').click(function(){
 //                ajax传数据到后台发送成功执行下面
@@ -58,7 +65,7 @@
 <body>
 <div class="captcha-box">
     <input type="text" id="mobile" maxlength="11" placeholder="请输入手机号码">
-    <input type="button" id="getting" value="获取验证码">
+    <input type="button" id="getting" value="获取验证码" disabled="disabled">
 </div>
 </body>
 </html>

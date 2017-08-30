@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsonp2</title>
+</head>
+<body>
+<input type="button" value="获取远程数据">
+<div id="pic">
+
+</div>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script>
+    $('input[type=button]').click(function () {
+        $.ajax({
+            type : "post",
+            url : "{:U('Test/jsonp2')}",
+            success : function(result){
+                for(var i in result[0]){
+                    $('#pic').append(result);
+                }
+//                console.log(result);
+//                console.log(result.length);
+
+            },
+            error:function(){
+                alert('fail');
+            }
+        });
+    })
+</script>
+</html>

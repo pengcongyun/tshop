@@ -143,6 +143,34 @@ class TestController extends Controller
     }
     //前端验证码
     public function captcha(){
+//        $this->display();
+        $this->display('captcha1');
+    }
+    //验证码新
+    public function captchas(){
         $this->display();
+    }
+    //jsonp
+    public function jsonp(){
+        $this->display();
+    }
+    //jsonp2
+    public function jsonp2(){
+        if(IS_AJAX){
+            $a=file_get_contents('http://588ku.com/sucai/0-pxnum-0-0-0-1/?h=bd&sem=1');
+            preg_match_all('/<img[^>]*>/i', $a, $match);
+            echo json_encode($match);exit;
+        }
+        $this->display();
+    }
+    //redis
+    public function redis(){
+        if(!empty(S('new_goods'))){
+            $data=S('new_goods');
+        }else{
+            $data=M('role')->select();
+            S('new_goods',$data,300);
+        }
+        var_dump($data);exit;
     }
 }

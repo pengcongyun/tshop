@@ -7,55 +7,16 @@
     <title>前端jquery生成验证码插件|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
     <link rel="stylesheet" type="text/css" href="_CSS_/normalize.css" />
     <link rel="stylesheet" type="text/css" href="_CSS_/htmleaf-demo.css">
-    <style type="text/css">
-        .captcha-chat{width: 300px;margin: 20px auto;}
-        p.wrong {
+    <style>
+        .info{
             display: none;
-        }
-
-        p.wrong.shake {
-            display: block;
-        }
-
-        p.wrong.shake {
-            animation: shake .4s cubic-bezier(.36, .07, .19, .97) both;
-            transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            perspective: 1000px;
-        }
-
-        @keyframes shake {
-            10%,
-            90% {
-                transform: translate3d(-1px, 0, 0);
-            }
-            20%,
-            80% {
-                transform: translate3d(1px, 0, 0);
-            }
-            30%,
-            50%,
-            70% {
-                transform: translate3d(-2px, 0, 0);
-            }
-            40%,
-            60% {
-                transform: translate3d(2px, 0, 0);
-            }
-        }
-
-        .controls img {
-            height: 20px;
         }
     </style>
 </head>
 <body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 <div class="htmleaf-container">
     <header class="htmleaf-header">
-        <h1>前端jquery生成验证码插件 <span>Pure Client side js captcha</span></h1>
+        <h1>验证码前端验证</h1>
     </header>
     <div class="captcha-chat">
         <div class="captcha-container media">
@@ -66,13 +27,13 @@
 
                 <div class="controls">
                     <input class="user-text btn-common" placeholder="输入验证码" type="text" />
-                    <button class="validate btn-common">
+                    <button class="validate">
                         <!-- this image should be converted into inline svg -->
-                        <img src="_IMG_/enter_icon.png" alt="submit icon">
+                        <img src="_IMG_/enter_icon.png" alt="submit icon"  style="width: 30px;height: 10px">
                     </button>
-                    <button class="refresh btn-common">
+                    <button class="refresh">
                         <!-- this image should be converted into inline svg -->
-                        <img src="_IMG_/refresh_icon.png" alt="refresh icon">
+                        <img src="_IMG_/refresh_icon.png" alt="refresh icon"  style="width: 30px;height: 10px">
                     </button>
                 </div>
             </div>
