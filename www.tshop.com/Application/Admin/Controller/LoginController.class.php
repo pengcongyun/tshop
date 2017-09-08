@@ -11,9 +11,10 @@ use Think\Controller;
 class LoginController extends Controller
 {
     public function login(){
-        if(!empty(cookie('admin'))){
-            redirect(U('Index/index'));exit;
-        }
+        //tp3.2bug ，必须在PHP5.4以上才行
+//        if(!empty(cookie('admin'))){
+//            redirect(U('Index/index'));exit;
+//        }
         if(IS_POST){
             //验证数据
             if(D('admin')->create()===false){

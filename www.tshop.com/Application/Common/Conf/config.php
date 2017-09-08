@@ -25,6 +25,12 @@ return array(
         '_ZTREE_'=>'/Public/ztree',
     ],
 
+    'URL_ROUTER_ON'=>true,//开启路由
+    'URL_ROUTE_RULES'=>array(//定义路由规则
+        'Goodlist'=>'Admin/Good/index',
+    ),
+
+
     //设置cookie前缀
     'COOKIE_PREFIX'=>'www_tshop_com_',
     'UPLOAD_SETTING'=>[
