@@ -19,6 +19,20 @@
     <div style="font-size: large;color: red;border: 1px blue dashed">
         $counts = M()->table('student')->count();// 总条数
     </div>
+    <div style="font-size: large;color: red;border: 1px blue dashed">
+        delete * from `md` where GistUnit regexp '^[0-9]+$';;// 删除字段为数字的行
+    </div>
+    <div style="font-size: large;color: red;border: 1px blue dashed">
+        delete from `md` where GistUnit='';// 删除字段为空的行
+    </div>
+    <div style="font-size: large;color: red;border: 1px blue dashed">
+        1.导出整个数据库
+        mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+        mysqldump -u wcnc -p smgp_apps_wcnc > wcnc.sql
+        2.导出一个表
+        mysqldump -u 用户名 -p 数据库名表名> 导出的文件名
+        mysqldump -u wcnc -p smgp_apps_wcnc users> wcnc_users.sql
+    </div>
 </div>
 <h1>更新</h1>
 <div style="border: 1px black solid">
@@ -54,5 +68,7 @@
     </div>
 
 </div>
+
+session入库，实现两个服务器的同步登陆
 </body>
 </html>
