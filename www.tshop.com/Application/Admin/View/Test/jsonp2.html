@@ -16,8 +16,11 @@
         $.ajax({
             type : "post",
             url : "{:U('Test/jsonp2')}",
-            success : function(result){
-                for(var i in result[0]){
+            success :
+                function(result){
+                    alert(11);
+
+                    for(var i in result[0]){
                     $('#pic').append(result);
                 }
 //                console.log(result);

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a id="xx">生成鼠标移入生成二维码</a>
+<div class="send-erweima" style="display: none"></div>
+
+<script src="_JS_/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="_JS_/jquery.qrcode.min.js"></script>
+<script>
+    var url="{__SELF__}";
+    $(".send-erweima").qrcode({
+        render: "canvas", //table方式
+        width: 124, //宽度
+        height:124, //高度
+        text: url, //任意内容
+    });
+    $('#xx').hover(function () {
+        $('.send-erweima').show();
+    },function () {
+        $('.send-erweima').hide();
+    })
+</script>
+</body>
+</html>

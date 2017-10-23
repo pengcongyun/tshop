@@ -50,6 +50,9 @@ class TestController extends Controller
     public function baidushare(){
         $this->display();
     }
+    public function baidushare2(){
+        $this->display();
+    }
     //动画效果html5
     public function move(){
         $this->display('move');
@@ -164,13 +167,67 @@ class TestController extends Controller
         $this->display();
     }
     //redis
-    public function redis(){
-        if(!empty(S('new_goods'))){
-            $data=S('new_goods');
-        }else{
-            $data=M('role')->select();
-            S('new_goods',$data,300);
+//    public function redis(){
+//        if(!empty(S('new_goods'))){
+//            $data=S('new_goods');
+//        }else{
+//            $data=M('role')->select();
+//            S('new_goods',$data,300);
+//        }
+//        var_dump($data);exit;
+//    }
+    //测试jQuerycode
+    public function jqcode(){
+        $this->display();
+    }
+    /**
+     * 数组 转 对象
+     *
+     * @param array $arr 数组
+     * @return object
+     */
+    function array_to_object($arr) {
+        if (gettype($arr) != 'array') {
+            return;
         }
-        var_dump($data);exit;
+        foreach ($arr as $k => $v) {
+            if (gettype($v) == 'array' || getType($v) == 'object') {
+                $arr[$k] = (object)($v);
+            }
+        }
+
+        return (object)$arr;
+    }
+    /**
+     * 对象 转 数组
+     *
+     * @param object $obj 对象
+     * @return array
+     */
+    function object_to_array($obj) {
+        $obj = (array)$obj;
+        foreach ($obj as $k => $v) {
+            if (gettype($v) == 'resource') {
+                return;
+            }
+            if (gettype($v) == 'object' || gettype($v) == 'array') {
+                $obj[$k] = (array)($v);
+            }
+        }
+
+        return $obj;
+    }
+    public function ob_arr(){
+        $arr=[1,3,4,5];
+        $arr2=$this->array_to_object($arr);
+        $arr3=$this->object_to_array($arr2);
+        var_dump($arr2);
+        echo "<br>";
+        var_dump($arr3);exit;
+    }
+    public function Iplocation(){
+        $ip = $_SERVER["REMOTE_ADDR"];//获取客户端IP
+        $info = (new Location()) -> GetIpLookup('222.74.21.206');//将ip换成$ip
+        dump($info);
     }
 }
