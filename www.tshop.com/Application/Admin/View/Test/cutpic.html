@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input{color: #4B91E3;font-family: Arial;/*font-size: 14px;*/cursor: pointer;background-color: #FFFFfF;opacity: 0;width: 56px;position: absolute;left: 0;top: 0;height: 16px;overflow: hidden; font-size:0;}
+        a{color: #4B91E3;font-family: Arial;font-size: 14px;cursor: pointer;position: relative;overflow: hidden;display: inline-block}
+    </style>
+</head>
+<body>
+
+<div class="screen-a">
+    <a id="alert">
+        修改头像<input type="file" name="pic1" id="imgPicker">
+    </a>
+</div>
+<!--截取头像-->
+<div class="cover-wrap" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background: rgba(0, 0, 0, 0.4);z-index: 10000000;text-align:center;">
+    <div class="" style="width:900px;height:600px;margin:10px auto;background-color:#FFFFFF;overflow: hidden;border-radius:4px;">
+        <div id="clipArea" style="margin:10px;height: 520px;"></div>
+        <div class="" style="height:56px;line-height:36px;text-align: center;padding-top:8px;">
+            <button id="clipBtn" style="width:120px;height: 36px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align: center;line-height: 36px;outline: none;font-family:Arial">保存头像</button>
+            <button id="cancel" style="width:120px;height: 36px;background-color:#ff8a00;color: #FFFFFF;font-size: 14px;text-align: center;line-height: 36px;outline: none;font-family:Arial;margin-left: 20px">取消上传</button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script type="text/javascript" src="/Public/plugins/cover_js/iscroll-zoom.js" charset="utf-8"></script>
+<script type="text/javascript" src="/Public/plugins/cover_js/hammer.js" charset="utf-8"></script>
+<script type="text/javascript" src="/Public/plugins/cover_js/lrz.all.bundle.js" charset="utf-8"></script>
+<script type="text/javascript" src="/Public/plugins/cover_js/jquery.photoClip.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var clipArea = new bjj.PhotoClip("#clipArea", {
+        size: [150, 150],// 截取框的宽和高组成的数组。默认值为[260,260]
+        outputSize: [0, 0], // 输出图像的宽和高组成的数组。默认值为[0,0]，表示输出图像原始大小
+        //outputType: "jpg", // 指定输出图片的类型，可选 "jpg" 和 "png" 两种种类型，默认为 "jpg"
+        file: "#imgPicker", // 上传图片的<input type="file">控件的选择器或者DOM对象
+//	view: "#view", // 显示截取后图像的容器的选择器或者DOM对象
+        ok: "#clipBtn", // 确认截图按钮的选择器或者DOM对象
+        loadStart: function() {
+            // 开始加载的回调函数。this指向 fileReader 对象，并将正在加载的 file 对象作为参数传入
+            $('.screen-a').hide();
+            $('.cover-wrap').fadeIn();
+            console.log("照片读取中");
+        },
+        loadComplete: function() {
+            // 加载完成的回调函数。this指向图片对象，并将图片地址作为参数传入
+            console.log("照片读取完成");
+        },
+        clipFinish: function(dataURL) {
+            // 裁剪完成的回调函数。this指向图片对象，会将裁剪出的图像数据DataURL作为参数传入
+            $('.cover-wrap').fadeOut();
+            $.post('{:U("test/cutpic")}',{data:dataURL},function (e) {
+                console.log(e);
+//                window.location.reload(true);
+            })
+        }
+    });
+</script>
+
+</html>

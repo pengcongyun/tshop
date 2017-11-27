@@ -147,9 +147,9 @@ class TestController extends Controller
     //前端验证码
     public function captcha(){
 //        $this->display();
-        $this->display('captcha1');
+        $this->display('captcha');
     }
-    //验证码新
+    //前端验证码新
     public function captchas(){
         $this->display();
     }
@@ -225,9 +225,47 @@ class TestController extends Controller
         echo "<br>";
         var_dump($arr3);exit;
     }
+    //ip获取
     public function Iplocation(){
         $ip = $_SERVER["REMOTE_ADDR"];//获取客户端IP
         $info = (new Location()) -> GetIpLookup('222.74.21.206');//将ip换成$ip
         dump($info);
+    }
+    //js图像验证码
+    public function jscode(){
+//        $this->display('jscode');
+        $this->display('jscode2');
+    }
+    //ajax头像上传
+    public function avatar(){
+        $this->display();
+    }
+    //图像剪切上传
+    public function cutpic(){
+        if(IS_POST){
+            $base_img = explode('base64,',$_POST['data'])[1];
+            $path = "./Upload/avatar/";
+            $output_file = time().'.jpg';
+            $path = $path.$output_file;
+            //创建将数据流文件写入我们创建的文件内容中
+            $ifp = fopen( $path, "wb" );
+            fwrite( $ifp, base64_decode( $base_img) );
+            fclose( $ifp );
+            $result=[
+                'status'=>1,
+            ];
+            echo json_encode($result);exit;
+        }
+        $this->display();
+    }
+    //cookie实现多长时间刷新页面
+    public function f5(){
+        if(!empty(cookie('gg'))){
+            cookie('gg',22,9*60);
+        }else{
+            cookie('gg',11,10*60);
+        }
+        $this->assign('xx',$_COOKIE['www_tshop_com_gg']);
+        $this->display();
     }
 }

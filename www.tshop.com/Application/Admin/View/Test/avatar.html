@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js上传头像</title>
+    <style>
+        input{color: #4B91E3;font-family: Arial;/*font-size: 14px;*/cursor: pointer;background-color: #FFFFfF;opacity: 0;width: 56px;position: absolute;left: 0;top: 0;height: 16px;overflow: hidden; font-size:0;}
+        a{color: #4B91E3;font-family: Arial;font-size: 14px;cursor: pointer;position: relative;overflow: hidden;display: inline-block}
+    </style>
+</head>
+<body>
+<a id="alert">
+    修改头像<input type="file" name="pic1" id="imgPicker">
+</a>
+<div id="img">
+    <img src="" alt="">
+</div>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script src="_LAYER_/layer.js"></script>
+<script>
+    window.onload = function(){
+        var file = document.getElementById("imgPicker");
+        file.onchange = function(){
+            var file = this.files[0];
+            if(!/image/.test(file.type)){
+                layer.alert('格式不对');
+                return;
+            }else {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(){
+                    $('#img img').attr('src',this.result);
+                }
+            }
+        }
+    }
+</script>
+</html>

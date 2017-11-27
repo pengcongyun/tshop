@@ -39,6 +39,9 @@
         然后使用source命令,后面参数为脚本文件(如这里用到的.sql)
         mysql>source d:wcnc_db.sql
     </div>
+    <div style="font-size: large;color: red;border: 1px blue dashed">
+        $sql="select ar.article_id,ar.category,arde.title from article ar JOIN article_description arde on ar.article_id=arde.article_id WHERE ar.article_id in ($care) order by FIELD(ar.article_id,$care)";按字段里顺序查询$care= 2,3,6,1
+    </div>
 </div>
 <h1>更新</h1>
 <div style="border: 1px black solid">
