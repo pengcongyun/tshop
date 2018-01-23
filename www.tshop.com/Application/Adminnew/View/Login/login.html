@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel='stylesheet prefetch' href='_CSS_//bootstrap.min.css'>
+    <link rel="stylesheet" href="_CSS_/loginstyle.css">
+</head>
+<body>
+<div class="wrapper">
+    <form class="form-signin" action="{:U('login/login')}" method="post">
+        <h2 class="form-signin-heading">Please login</h2>
+        <input type="text" class="form-control" name="username" placeholder="Email Address" required autofocus=""/>
+        <input type="password" class="form-control" name="password" placeholder="Password" required/>
+        <label class="checkbox">
+            <input type="checkbox" value="1" id="rememberMe" name="rememberMe"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+</div>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script>
+    $(function () {
+        $('input[name=username]').blur(function () {
+            alert(11);
+        })
+    })
+</script>
+</html>

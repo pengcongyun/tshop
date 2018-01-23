@@ -111,7 +111,7 @@ class Mysql extends Driver{
      */
     public function insertAll($dataSet,$options=array(),$replace=false) {
         $values  =  array();
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         if(!is_array($dataSet[0])) return false;
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         $fields =   array_map(array($this,'parseKey'),array_keys($dataSet[0]));

@@ -240,6 +240,10 @@ class TestController extends Controller
     public function avatar(){
         $this->display();
     }
+    //ajax多图上传
+    public function avatarmore(){
+        $this->display();
+    }
     //图像剪切上传
     public function cutpic(){
         if(IS_POST){
@@ -261,11 +265,19 @@ class TestController extends Controller
     //cookie实现多长时间刷新页面
     public function f5(){
         if(!empty(cookie('gg'))){
-            cookie('gg',22,9*60);
+            cookie('gg',22,1*60);
         }else{
-            cookie('gg',11,10*60);
+            cookie('gg',11,1*60);
         }
         $this->assign('xx',$_COOKIE['www_tshop_com_gg']);
+        $this->display();
+    }
+    //js实现点击添加一行，删除
+    public function adddel(){
+        $this->display();
+    }
+    //上传多图ajax
+    public function addmorepic(){
         $this->display();
     }
 }

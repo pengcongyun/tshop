@@ -194,7 +194,7 @@ class Mongo extends Driver {
         if(isset($options['table'])) {
             $this->switchCollection($options['table']);
         }
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->executeTimes++;
         N('db_write',1); // 兼容代码        
         if($this->config['debug']) {
@@ -230,7 +230,7 @@ class Mongo extends Driver {
         if(isset($options['table'])) {
             $this->switchCollection($options['table']);
         }
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->executeTimes++;
         N('db_write',1); // 兼容代码        
         try{
@@ -277,7 +277,7 @@ class Mongo extends Driver {
         }
         $this->executeTimes++;
         N('db_write',1); // 兼容代码        
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $query   = $this->parseWhere(isset($options['where'])?$options['where']:array());
         $set  =  $this->parseSet($data);
         if($this->config['debug']) {
@@ -311,7 +311,7 @@ class Mongo extends Driver {
             $this->switchCollection($options['table']);
         }
         $query   = $this->parseWhere(isset($options['where'])?$options['where']:array());
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->executeTimes++;
         N('db_write',1); // 兼容代码        
         if($this->config['debug']) {
@@ -337,7 +337,7 @@ class Mongo extends Driver {
         if(isset($options['table'])) {
             $this->switchCollection($options['table']);
         }
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->executeTimes++;
         N('db_write',1); // 兼容代码        
         if($this->config['debug']) {
@@ -363,7 +363,7 @@ class Mongo extends Driver {
         if(isset($options['table'])) {
             $this->switchCollection($options['table'],'',false);
         }
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->queryTimes++;
         N('db_query',1); // 兼容代码        
         $query  =  $this->parseWhere(isset($options['where'])?$options['where']:array());
@@ -440,7 +440,7 @@ class Mongo extends Driver {
         if(isset($options['table'])) {
             $this->switchCollection($options['table'],'',false);
         }
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->queryTimes++;
         N('db_query',1); // 兼容代码        
         $query  =  $this->parseWhere(isset($options['where'])?$options['where']:array());
@@ -473,7 +473,7 @@ class Mongo extends Driver {
             }
         }
         
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->queryTimes++;
         N('db_query',1); // 兼容代码        
         $query  =  $this->parseWhere(isset($options['where'])?$options['where']:array());

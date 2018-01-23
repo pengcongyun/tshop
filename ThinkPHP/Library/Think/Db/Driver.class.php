@@ -797,7 +797,7 @@ abstract class Driver {
      */
     public function insert($data,$options=array(),$replace=false) {
         $values  =  $fields    = array();
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         foreach ($data as $key=>$val){
             if(is_array($val) && 'exp' == $val[0]){
@@ -835,7 +835,7 @@ abstract class Driver {
      */
     public function insertAll($dataSet,$options=array(),$replace=false) {
         $values  =  array();
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         if(!is_array($dataSet[0])) return false;
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         $fields =   array_map(array($this,'parseKey'),array_keys($dataSet[0]));
@@ -872,7 +872,7 @@ abstract class Driver {
      * @return false | integer
      */
     public function selectInsert($fields,$table,$options=array()) {
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         if(is_string($fields))   $fields    = explode(',',$fields);
         array_walk($fields, array($this, 'parseKey'));
@@ -889,7 +889,7 @@ abstract class Driver {
      * @return false | integer
      */
     public function update($data,$options) {
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         $table  =   $this->parseTable($options['table']);
         $sql   = 'UPDATE ' . $table . $this->parseSet($data);
@@ -913,7 +913,7 @@ abstract class Driver {
      * @return false | integer
      */
     public function delete($options=array()) {
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         $table  =   $this->parseTable($options['table']);
         $sql    =   'DELETE FROM '.$table;
@@ -940,7 +940,7 @@ abstract class Driver {
      * @return mixed
      */
     public function select($options=array()) {
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         $sql    = $this->buildSelectSql($options);
         $result   = $this->query($sql,!empty($options['fetch_sql']) ? true : false);
@@ -1052,7 +1052,7 @@ abstract class Driver {
                 G('queryStartTime');
             }else{
                 $this->modelSql[$this->model]   =  $this->queryStr;
-                //$this->model  =   '_think_';
+                //$this->Model  =   '_think_';
                 // 记录操作结束时间
                 G('queryEndTime');
                 trace($this->queryStr.' [ RunTime:'.G('queryStartTime','queryEndTime').'s ]','','SQL');

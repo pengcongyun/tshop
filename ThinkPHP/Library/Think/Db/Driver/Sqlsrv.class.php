@@ -135,7 +135,7 @@ class Sqlsrv extends Driver{
      * @return false | integer
      */
     public function update($data,$options) {
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         $sql   = 'UPDATE '
             .$this->parseTable($options['table'])
@@ -153,7 +153,7 @@ class Sqlsrv extends Driver{
      * @return false | integer
      */
     public function delete($options=array()) {
-        $this->model  =   $options['model'];
+        $this->model  =   $options['Model'];
         $this->parseBind(!empty($options['bind'])?$options['bind']:array());
         $sql   = 'DELETE FROM '
             .$this->parseTable($options['table'])

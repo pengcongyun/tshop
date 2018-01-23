@@ -136,13 +136,13 @@
 	 *  @namespace
 	 */
 	DataTable.models = {};
-	require('model.ext.js');
-	require('model.search.js');
-	require('model.row.js');
-	require('model.column.js');
-	require('model.defaults.js');
-	require('model.defaults.columns.js');
-	require('model.settings.js');
+	require('Model.ext.js');
+	require('Model.search.js');
+	require('Model.row.js');
+	require('Model.column.js');
+	require('Model.defaults.js');
+	require('Model.defaults.columns.js');
+	require('Model.settings.js');
 
 	/**
 	 * Extension object for DataTables that is used to provide all extension options.

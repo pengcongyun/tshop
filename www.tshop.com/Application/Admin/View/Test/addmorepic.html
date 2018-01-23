@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax上传多图</title>
+    <style>
+        #imgPicker{color: #4B91E3;font-family: Arial;/*font-size: 14px;*/cursor: pointer;background-color: #FFFFfF;opacity: 0;width: 56px;position: absolute;left: 0;top: 0;height: 16px;overflow: hidden; font-size:0;}
+        a{color: #4B91E3;font-family: Arial;font-size: 14px;cursor: pointer;position: relative;overflow: hidden;display: inline-block}
+    </style>
+</head>
+<body>
+
+<a id="alert">
+    添加图像<input type="file" name="pic1" id="imgPicker">
+</a>
+<form action="" method="post" enctype="multipart/form-data">
+<div id="img">
+    fdfdf
+</div>
+
+<div>
+    <input type="submit" value="提交">
+</div>
+</form>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script src="_LAYER_/layer.js"></script>
+<script>
+    window.onload = function(){
+        var file = document.getElementById("imgPicker");
+        file.onchange = function(){
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            if(/image/.test(file.type)){
+                reader.onload = function(){
+                    var img='<div style="width: 150px;height: 100px;border: 1px solid black;float: left;text-align: center">' +
+                        '<img src="'+this.result+'" width="150" height="100" style="margin: 0 auto;">' +
+                        '<input type="hidden" name="pic[]" value="'+this.result+'">' +
+                        '<i style="cursor: pointer" class="del">x</i>' +
+                        '</div>';
+                    $('#img').append(img);
+                };
+            }else if(/video/.test(file.type)){
+                reader.onload = function(){
+                    var img='<div style="width: 150px;height: 100px;border: 1px solid black;float: left;text-align: center">' +
+                        '<video src="'+this.result+'" width="150" height="100" controls="controls">                    </video>' +
+                        '<input type="hidden" name="pic[]" value="'+this.result+'">' +
+                        '<i style="cursor: pointer" class="del">x</i>' +
+                        '</div>';
+                    $('#img').append(img);
+                };
+            }else {
+                layer.alert('格式不对');
+                return;
+            }
+        }
+    };
+    $('#img').on('click','.del',function () {
+        $(this).parent('div').remove();
+    })
+</script>
+</html>

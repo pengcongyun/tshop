@@ -642,7 +642,7 @@ class Model {
             $options['table']  .=   ' '.$options['alias'];
         }
         // 记录操作的模型名称
-        $options['model']       =   $this->name;
+        $options['Model']       =   $this->name;
 
         // 字段类型验证
         if(isset($options['where']) && is_array($options['where']) && !empty($fields) && !isset($options['join'])) {

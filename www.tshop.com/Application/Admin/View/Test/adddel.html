@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js点击添加一行</title>
+</head>
+<body>
+<h2>内容</h2>
+<b class="add">添加</b>
+<div class="box">
+
+</div>
+</body>
+<script src="_JS_/jquery.js"></script>
+<script>
+    $('.add').click(function () {
+        var tt='<div class="bb"><li>哈哈<b style="cursor: pointer;color: red;" class="del">X</b></li></div>';
+        var box=$('.box');
+        box.append(tt);
+    });
+    $('.box').on('click','.del',function () {
+        var node=$(this);
+        node.parent('li').parent('.bb').remove();
+    });
+</script>
+</html>

@@ -382,7 +382,7 @@ class Lite {
                 G('queryStartTime');
             }else{
                 $this->modelSql[$this->model]   =  $this->queryStr;
-                //$this->model  =   '_think_';
+                //$this->Model  =   '_think_';
                 // 记录操作结束时间
                 G('queryEndTime');
                 trace($this->queryStr.' [ RunTime:'.G('queryStartTime','queryEndTime').'s ]','','SQL');
